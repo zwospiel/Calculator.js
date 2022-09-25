@@ -8,6 +8,10 @@ function parensAreBalanced(formula) {
             throw new Error("Invalid input.")
         }
     }
+
+    if (formula === "") {
+        return true
+    }
 }
 
 
