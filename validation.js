@@ -1,4 +1,12 @@
 function parensAreBalanced(formula) {
+    validate(formula)
+    
+    if (formula === "") {
+        return true
+    }
+}
+
+function validate(formula) {
     if (typeof(formula) !== "string") {
         throw new TypeError("Expected input to be a string.")
     }
@@ -8,11 +16,6 @@ function parensAreBalanced(formula) {
             throw new Error("Invalid input.")
         }
     }
-
-    if (formula === "") {
-        return true
-    }
 }
-
 
 module.exports = parensAreBalanced
