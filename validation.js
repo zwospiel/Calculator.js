@@ -5,16 +5,38 @@ function bracketsAreBalanced(formula) {
         return true
     }
 
-    let count = 0
+    let openedBrackets = []
     for (const character of formula) {
-        if (character == '(') {
-            count++
-        } else if (--count < 0) {
+        if (isOpenBracket(character)) {
+           openedBrackets.push(character)
+        } else if (openedBrackets[openedBrackets.length - 1] == openedBracketBy(character)) {
+            openedBrackets.pop()
+        } else {
             return false
         }
     }
 
-    return count == 0
+    return openedBrackets.length == 0
+}
+
+function isOpenBracket(character) {
+    return [ '{', '[', '(' ].includes(character)
+}
+
+function isClosedBracket(character) {
+    return [ '}', ']', ')' ].includes(character)
+}
+
+function openedBracketBy(closedBracket) {
+    if (closedBracket === '}') {
+        return '{'
+    } else if (closedBracket === ']') {
+        return '['
+    } else if (closedBracket === ')') {
+        return '('
+    } else { 
+        throw new Error("Invalid closed Bracket")
+    }
 }
 
 function validate(formula) {
@@ -23,7 +45,8 @@ function validate(formula) {
     }
 
     for (const character of formula) {
-        if (character != '(' && character != ')') {
+        if (character != '(' && character != ')' && character != '[' && character != ']' 
+        && character != '{' && character != '}') {
             throw new Error("Invalid input.")
         }
     }
