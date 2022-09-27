@@ -1,4 +1,4 @@
-function parensAreBalanced(formula) {
+function bracketsAreBalanced(formula) {
     validate(formula)
 
     if (formula === "") {
@@ -30,4 +30,4 @@ function validate(formula) {
 }
 
 
-module.exports = parensAreBalanced
+module.exports = bracketsAreBalanced
