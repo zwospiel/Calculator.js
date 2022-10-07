@@ -19,7 +19,7 @@ function bracketsAreBalanced(formula) {
         }
     }
 
-    return openedBrackets.length == 0
+    return openedBrackets.length === 0
 }
 
 function validate(formula) {
