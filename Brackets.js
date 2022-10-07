@@ -1,8 +1,8 @@
 class Brackets {
     static #closedByOpeningBrackets = {
-        '(': ')',
-        '[': ']',
-        '{': '}',
+        "(": ")",
+        "[": "]",
+        "{": "}",
     }
 
     static get #openingBrackets() {
