@@ -1,4 +1,5 @@
 const Brackets = require("./Brackets")
+const InvalidInput = require("./Errors")
 
 
 function bracketsAreBalanced(formula) {
@@ -29,7 +30,7 @@ function validate(formula) {
 
     for (const character of formula) {
         if (!Brackets.isValidBracket(character)) {
-            throw new Error("Invalid input.")
+            throw new InvalidInput(character)
         }
     }
 }

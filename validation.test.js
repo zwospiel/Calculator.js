@@ -1,4 +1,5 @@
 const bracketsAreBalanced = require("./validation")
+const InvalidInput = require("./Errors")
 
 
 describe("Expect bracketsAreBalanced to throw", () => {
@@ -9,11 +10,11 @@ describe("Expect bracketsAreBalanced to throw", () => {
             expect(() => bracketsAreBalanced([ "(", ")" ])).toThrow(TypeError)
         })
     })
-    describe("an Error", () => {
+    describe("an InvalidInput error", () => {
         test("for inputs with invalid characters", () => {
-            expect(() => bracketsAreBalanced("4")).toThrow(Error)
-            expect(() => bracketsAreBalanced("(4)")).toThrow(Error)
-            expect(() => bracketsAreBalanced("(4+5)")).toThrow(Error)
+            expect(() => bracketsAreBalanced("4")).toThrow(InvalidInput)
+            expect(() => bracketsAreBalanced("(4)")).toThrow(InvalidInput)
+            expect(() => bracketsAreBalanced("(4+5)")).toThrow(InvalidInput)
         })
     })
     describe("nothing", () => {
