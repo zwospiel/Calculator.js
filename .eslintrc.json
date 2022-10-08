@@ -5,6 +5,7 @@
         "es2021": true,
         "jest": true
     },
+    "plugins": ["only-warn"],
     "extends": "eslint:recommended",
     "overrides": [
     ],
