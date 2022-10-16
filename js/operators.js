@@ -16,6 +16,18 @@ function plus(a, b) {
 
 function multiply(a, b) {
     validateOperators(a), validateOperators(b)
+
+    let signedBit = 1 << 31
+    let negativeResult = false
+    if (a & signedBit) {
+        a = negateInteger(a)
+        negativeResult = !negativeResult
+    }
+    if (b & signedBit) {
+        b = negateInteger(b)
+        negativeResult = !negativeResult
+    }
+
     let result = 0
     while (a !== 0) {
         if ((a & 1) === 1) {
@@ -24,7 +36,10 @@ function multiply(a, b) {
         a = a >>> 1
         b = b << 1
     }
-    return result
+
+    if (negativeResult) {
+        return negateInteger(result)
+    } else { return result }
 }
 
 function validateOperators(input) {
@@ -34,6 +49,11 @@ function validateOperators(input) {
     if (!(Number.isInteger(input))) {
         throw new InvalidInput("Not an integer.")
     }
+}
+
+function negateInteger(integer) {
+    let bitflipSummand = -1 >> 32
+    return ((integer ^ bitflipSummand) + 1)
 }
 
 
