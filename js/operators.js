@@ -16,7 +16,15 @@ function plus(a, b) {
 
 function multiply(a, b) {
     validateOperators(a), validateOperators(b)
-    return 0
+    let result = 0
+    while (a !== 0) {
+        if ((a & 1) === 1) {
+            result += b
+        }
+        a = a >>> 1
+        b = b << 1
+    }
+    return result
 }
 
 function validateOperators(input) {
