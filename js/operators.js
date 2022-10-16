@@ -18,5 +18,9 @@ function plus(a, b) {
     return a
 }
 
+function multiply(a, b) {
+    return 0
+}
 
-module.exports = { plus }
+
+module.exports = { plus, multiply }
