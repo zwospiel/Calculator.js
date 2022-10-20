@@ -1,5 +1,5 @@
-const { plus } = require("./operators")
-const { multiply } = require("./operators")
+const { plus } = require("./Operators/plus")
+const { multiply } = require("./Operators/multiply")
 const InvalidInput = require("./Errors")
 
 
@@ -55,7 +55,7 @@ describe("Multiply", () => {
             expect(multiply(0, 0)).toBe(0)
         })
         test("when multiplying a negative number by 0", () => {
-            expect(multiply(0,-12)).toBe(0)
+            expect(multiply(0, -12)).toBe(0)
             expect(multiply(0, -7)).toBe(0)
         })
     })

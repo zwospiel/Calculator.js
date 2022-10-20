@@ -1,18 +1,4 @@
-const InvalidInput = require("./Errors")
-
-
-function plus(a, b) {
-    validateOperators(a, b)
-
-    let carry = 0
-    while (b !== 0) {
-        carry = a & b
-        a = a ^ b
-        b = carry << 1
-    }
-
-    return a
-}
+const { validateOperators } = require("./operatorValidation")
 
 function multiply(a, b) {
     validateOperators(a, b)
@@ -44,21 +30,9 @@ function multiply(a, b) {
     }
 }
 
-function validateOperators(...input) {
-    for (const i of input) {
-        if (typeof(i) !== "number") {
-            throw new TypeError("Not a number.")
-        }
-        if (!(Number.isInteger(i))) {
-            throw new InvalidInput("Not an integer.")
-        }
-    }
-}
-
 function negateInteger(integer) {
     let bitflipSummand = -1 >> 32
     return ((integer ^ bitflipSummand) + 1)
 }
 
-
-module.exports = { plus, multiply }
+module.exports = { multiply }
