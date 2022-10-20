@@ -39,7 +39,7 @@ describe("Plus", () => {
 })
 
 describe("Multiply", () => {
-    describe("returns correct sum", () => {
+    describe("returns correct product", () => {
         test("for positive factors", () => {
             expect(multiply(3, 4)).toBe(12)
             expect(multiply(123, 456)).toBe(56088)
@@ -53,6 +53,10 @@ describe("Multiply", () => {
             expect(multiply(0, 4)).toBe(0)
             expect(multiply(4, 0)).toBe(0)
             expect(multiply(0, 0)).toBe(0)
+        })
+        test("when multiplying a negative number by 0", () => {
+            expect(multiply(0,-12)).toBe(0)
+            expect(multiply(0, -7)).toBe(0)
         })
     })
     describe("throws", () => {

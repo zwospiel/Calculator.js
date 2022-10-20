@@ -2,7 +2,7 @@ const InvalidInput = require("./Errors")
 
 
 function plus(a, b) {
-    validateOperators(a), validateOperators(b)
+    validateOperators(a, b)
 
     let carry = 0
     while (b !== 0) {
@@ -15,17 +15,17 @@ function plus(a, b) {
 }
 
 function multiply(a, b) {
-    validateOperators(a), validateOperators(b)
+    validateOperators(a, b)
 
     let signedBit = 1 << 31
-    let negativeResult = false
+    let isNegativeResult = false
     if (a & signedBit) {
         a = negateInteger(a)
-        negativeResult = !negativeResult
+        isNegativeResult = !isNegativeResult
     }
     if (b & signedBit) {
         b = negateInteger(b)
-        negativeResult = !negativeResult
+        isNegativeResult = !isNegativeResult
     }
 
     let result = 0
@@ -37,17 +37,21 @@ function multiply(a, b) {
         b = b << 1
     }
 
-    if (negativeResult) {
+    if (isNegativeResult) {
         return negateInteger(result)
-    } else { return result }
+    } else {
+        return result
+    }
 }
 
-function validateOperators(input) {
-    if (typeof(input) !== "number") {
-        throw new TypeError("Not a number.")
-    }
-    if (!(Number.isInteger(input))) {
-        throw new InvalidInput("Not an integer.")
+function validateOperators(...input) {
+    for (const i of input) {
+        if (typeof(i) !== "number") {
+            throw new TypeError("Not a number.")
+        }
+        if (!(Number.isInteger(i))) {
+            throw new InvalidInput("Not an integer.")
+        }
     }
 }
 
