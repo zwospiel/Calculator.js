@@ -6,27 +6,27 @@ class Brackets {
     }
 
     static get #openingBrackets() {
-        return Object.keys(this.#closedByOpeningBrackets)
+        return Object.keys(Brackets.#closedByOpeningBrackets)
     }
 
     static get #closingBrackets() {
-        return Object.values(this.#closedByOpeningBrackets)
+        return Object.values(Brackets.#closedByOpeningBrackets)
     }
 
     static get #validBrackets() {
-        return this.#openingBrackets.concat(this.#closingBrackets)
+        return Brackets.#openingBrackets.concat(Brackets.#closingBrackets)
     }
 
     static isOpeningBracket(character) {
-        return this.#openingBrackets.includes(character)
+        return Brackets.#openingBrackets.includes(character)
     }
 
     static getClosingBracketFor(openingBracket) {
-        return this.#closedByOpeningBrackets[openingBracket]
+        return Brackets.#closedByOpeningBrackets[openingBracket]
     }
 
     static isValidBracket(character) {
-        return this.#validBrackets.includes(character)
+        return Brackets.#validBrackets.includes(character)
     }
 }
 
