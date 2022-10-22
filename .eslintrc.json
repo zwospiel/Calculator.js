@@ -5,7 +5,10 @@
         "es2021": true,
         "jest": true
     },
-    "plugins": ["only-warn"],
+    "plugins": [
+        "only-warn",
+        "import"
+    ],
     "extends": "eslint:recommended",
     "overrides": [
     ],
@@ -166,6 +169,16 @@
             "warn"
         ],
         "switch-colon-spacing": [
+            "warn"
+        ],
+        "import/first": [
+            "warn"
+        ],
+        "import/newline-after-import": [
+            "warn",
+            { "count": 2 }
+        ],
+        "import/no-commonjs": [
             "warn"
         ]
     }
