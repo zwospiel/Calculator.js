@@ -1,5 +1,5 @@
-const bracketsAreBalanced = require("./validation")
-const InvalidInput = require("./Errors")
+import { bracketsAreBalanced } from "./validation"
+import { InvalidInput } from "./Errors"
 
 
 describe("Expect bracketsAreBalanced to throw", () => {
