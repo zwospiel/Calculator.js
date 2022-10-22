@@ -1,7 +1,7 @@
-const InvalidInput = require("./Errors")
+import { InvalidInput } from "./Errors"
 
 
-function plus(a, b) {
+export function plus(a, b) {
     if (typeof(a) !== "number" | typeof(b) !== "number") {
         throw new TypeError("Not a number.")
     } else if (!(Number.isInteger(a) & Number.isInteger(b))) {
@@ -17,6 +17,3 @@ function plus(a, b) {
 
     return a
 }
-
-
-module.exports = { plus }

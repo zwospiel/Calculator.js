@@ -1,5 +1,5 @@
-const { plus } = require("./operators")
-const InvalidInput = require("./Errors")
+import { plus } from "./operators"
+import { InvalidInput } from "./Errors"
 
 
 describe("Plus", () => {

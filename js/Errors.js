@@ -1,8 +1,5 @@
-class InvalidInput extends Error {
+export class InvalidInput extends Error {
     constructor(message) {
         super("Invalid input: " + message)
     }
 }
-
-
-module.exports = InvalidInput

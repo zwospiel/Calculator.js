@@ -1,8 +1,8 @@
-const Brackets = require("./Brackets")
-const InvalidInput = require("./Errors")
+import { Brackets } from "./Brackets"
+import { InvalidInput } from "./Errors"
 
 
-function bracketsAreBalanced(formula) {
+export function bracketsAreBalanced(formula) {
     validate(formula)
 
     if (formula === "") {
@@ -34,6 +34,3 @@ function validate(formula) {
         }
     }
 }
-
-
-module.exports = bracketsAreBalanced

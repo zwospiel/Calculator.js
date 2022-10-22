@@ -1,4 +1,4 @@
-class Brackets {
+export class Brackets {
     static #closedByOpeningBrackets = {
         "(": ")",
         "[": "]",
@@ -29,6 +29,3 @@ class Brackets {
         return Brackets.#validBrackets.includes(character)
     }
 }
-
-
-module.exports = Brackets
