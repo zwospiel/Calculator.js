@@ -1,0 +1,15 @@
+body {
+    background-color: blueviolet;
+}
+
+button.light {
+    background-color: #eee;
+}
+
+button.dark {
+    background-color: #ddd;
+}
+
+button:hover {
+    background-color: #ccc;
+}
