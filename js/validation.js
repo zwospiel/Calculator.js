@@ -11,9 +11,9 @@ export function bracketsAreBalanced(formula) {
 
     let openedBrackets = []
     for (const character of formula) {
-        if (Brackets.isOpeningBracket(character)) {
+        if (Brackets.isOpen(character)) {
             openedBrackets.push(character)
-        } else if (character === Brackets.getClosingBracketFor(openedBrackets.slice(-1)[0])) {
+        } else if (character === Brackets.getClosed(openedBrackets.slice(-1)[0])) {
             openedBrackets.pop()
         } else {
             return false
@@ -29,7 +29,7 @@ function validate(formula) {
     }
 
     for (const character of formula) {
-        if (!Brackets.isValidBracket(character)) {
+        if (!Brackets.includes(character)) {
             throw new InvalidInput(character)
         }
     }
