@@ -19,6 +19,30 @@ export class Integer {
         return a
     }
 
+    static multiply(a, b) {
+        Integer.#validate(a, b)
+        let isNegativeResult = false
+        if (Integer.#isNegative(a)) {
+            a = Integer.#negate(a)
+            isNegativeResult = !isNegativeResult
+        }
+        if (Integer.#isNegative(b)) {
+            b = Integer.#negate(b)
+            isNegativeResult = !isNegativeResult
+        }
+
+        let result = 0
+        while (a !== 0) {
+            if (Integer.#isEven(a)) {
+                result = Integer.add(result, b)
+            }
+            a = a >>> 1
+            b = b << 1
+        }
+
+        return isNegativeResult ? Integer.#negate(result) : result
+    }
+
     static negate(integer) {
         Integer.#validate(integer)
         return Integer.#negate(integer)
@@ -31,6 +55,15 @@ export class Integer {
     static #flipBits(integer) {
         // Flipping bits is equal to an XOR comparison with 1 for every bit of the input.
         return integer ^ (Integer.MIN >> 31)
+    }
+
+    static #isNegative(integer) {
+        // A bitwise AND operation with 1000... is equivalent to checking negativity.
+        return (integer & Integer.MIN) !== 0
+    }
+
+    static #isEven(integer) {
+        return (integer & 1) === 1
     }
 
     static #validate(...input) {
