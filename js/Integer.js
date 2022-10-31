@@ -21,26 +21,20 @@ export class Integer {
 
     static multiply(a, b) {
         Integer.#validate(a, b)
-        let isNegativeResult = false
-        if (Integer.#isNegative(a)) {
-            a = Integer.#negate(a)
-            isNegativeResult = !isNegativeResult
-        }
-        if (Integer.#isNegative(b)) {
-            b = Integer.#negate(b)
-            isNegativeResult = !isNegativeResult
-        }
 
-        let result = 0
-        while (a !== 0) {
-            if (Integer.#isEven(a)) {
-                result = Integer.add(result, b)
+        let absA = Integer.#abs(a)
+        let absB = Integer.#abs(b)
+        let absResult = 0
+
+        while (absA !== 0) {
+            if (Integer.#isEven(absA)) {
+                absResult = Integer.add(absResult, absB)
             }
-            a = a >>> 1
-            b = b << 1
+            absA = absA >>> 1
+            absB = absB << 1
         }
 
-        return isNegativeResult ? Integer.#negate(result) : result
+        return Integer.#haveSameSign(a, b) ? absResult : Integer.#negate(absResult)
     }
 
     static negate(integer) {
@@ -55,6 +49,16 @@ export class Integer {
     static #flipBits(integer) {
         // Flipping bits is equal to an XOR comparison with 1 for every bit of the input.
         return integer ^ (Integer.MIN >> 31)
+    }
+
+    static #abs(integer) {
+        return Integer.#isNegative(integer) ? Integer.#negate(integer) : integer
+    }
+
+    static #haveSameSign(a, b) {
+        // Since the most significant bit defines the sign of an integer,
+        // a XOR b is positive if a and b have the same sign and negative if not.
+        return !Integer.#isNegative(a ^ b)
     }
 
     static #isNegative(integer) {
