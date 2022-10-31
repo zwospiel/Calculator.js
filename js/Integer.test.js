@@ -36,3 +36,34 @@ describe("Integer.add", () => {
         })
     })
 })
+
+describe("Integer.negate", () => {
+    describe("returns negated input", () => {
+        test("for positive numbers", () => {
+            expect(Integer.negate(3)).toBe(-3)
+            expect(Integer.negate(123)).toBe(-123)
+        })
+        test("for negative numbers", () => {
+            expect(Integer.negate(-4)).toBe(4)
+            expect(Integer.negate(-501)).toBe(501)
+        })
+    })
+    describe("does not change input", () => {
+        test("for zero", () => {
+            expect(Integer.negate(0)).toBe(0)
+        })
+    })
+    describe("throws", () => {
+        describe("a TypeError", () => {
+            test("for non-number inputs", () => {
+                expect(() => Integer.negate("4")).toThrow(TypeError)
+                expect(() => Integer.negate([ 4 ])).toThrow(TypeError)
+            })
+        })
+        describe("an InvalidInput error", () => {
+            test("for non-integer inputs", () => {
+                expect(() => Integer.negate(4.1)).toThrow(InvalidInput)
+            })
+        })
+    })
+})
