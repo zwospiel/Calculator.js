@@ -18,11 +18,11 @@ export class Brackets {
     }
 
     /**
-     * @param {string} character
-     * @returns {boolean} True if the given character is an open bracket, false if not.
+     * @param {string} token
+     * @returns {boolean} True if the given token is an open bracket, false if not.
      */
-    static isOpen(character) {
-        return Brackets.#openBrackets.includes(character)
+    static isOpen(token) {
+        return Brackets.#openBrackets.includes(token)
     }
 
     /**
@@ -34,10 +34,10 @@ export class Brackets {
     }
 
     /**
-     * @param {string} character
-     * @returns {boolean} True if the given character is a valid bracket, false if not.
+     * @param {string} token
+     * @returns {boolean} True if the given token is a valid bracket, false if not.
      */
-    static includes(character) {
-        return Brackets.#validBrackets.includes(character)
+    static includes(token) {
+        return Brackets.#validBrackets.includes(token)
     }
 }

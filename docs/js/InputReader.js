@@ -30,8 +30,8 @@ export class InputReader {
         }
     }
 
-    static #isNumber(char) {
-        return /\d/.test(char)
+    static #isNumber(character) {
+        return /\d/.test(character)
     }
 
     #parseNumberAt(i) {
