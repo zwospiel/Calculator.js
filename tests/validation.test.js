@@ -1,5 +1,5 @@
-import { bracketsAreBalanced } from "./validation"
-import { InvalidInput } from "./Errors"
+import { bracketsAreBalanced } from "../docs/js/validation"
+import { InvalidInput } from "../docs/js/Errors"
 
 
 describe("Expect bracketsAreBalanced to throw", () => {
