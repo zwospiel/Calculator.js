@@ -5,7 +5,7 @@ import { UnknownOperator } from "./Errors"
 export class Operators {
     static #toPrecedence = {
         "+": 1,
-        "×": 2,
+        "*": 2,
     }
 
     static isOperator(token) {
@@ -38,7 +38,7 @@ export class Operators {
         switch (operator) {
             case "+":
                 return Integer.add(operand1, operand2)
-            case "×":
+            case "*":
                 return Integer.multiply(operand1, operand2)
             default:
                 throw new UnknownOperator(operator)
