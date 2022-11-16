@@ -1,5 +1,5 @@
-import { Integer } from "./Integer"
-import { InvalidInput } from "./Errors"
+import { Integer } from "../docs/js/Integer"
+import { InvalidInput } from "../docs/js/Errors"
 
 
 describe("Integer.add", () => {
