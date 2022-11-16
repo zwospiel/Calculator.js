@@ -2,15 +2,15 @@ import { Brackets } from "./Brackets"
 import { InvalidInput } from "./Errors"
 
 
-export function bracketsAreBalanced(formula) {
-    validate(formula)
+export function bracketsAreBalanced(expression) {
+    validate(expression)
 
-    if (formula === "") {
+    if (expression === "") {
         return true
     }
 
     let openedBrackets = []
-    for (const character of formula) {
+    for (const character of expression) {
         if (Brackets.isOpen(character)) {
             openedBrackets.push(character)
         } else if (character === Brackets.getClosed(openedBrackets.slice(-1)[0])) {
@@ -23,12 +23,12 @@ export function bracketsAreBalanced(formula) {
     return openedBrackets.length === 0
 }
 
-function validate(formula) {
-    if (typeof(formula) !== "string") {
+function validate(expression) {
+    if (typeof(expression) !== "string") {
         throw new TypeError("Expected input to be a string.")
     }
 
-    for (const character of formula) {
+    for (const character of expression) {
         if (!Brackets.includes(character)) {
             throw new InvalidInput(character)
         }
