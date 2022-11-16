@@ -26,6 +26,14 @@ export class Brackets {
     }
 
     /**
+     * @param {string} token
+     * @returns {boolean} True if the given token is an closed bracket, false if not.
+     */
+    static isClosed(token) {
+        return Brackets.#closedBrackets.includes(token)
+    }
+
+    /**
      * @param {string} openBracket
      * @returns {string} The matching closed bracket to the given open bracket.
      */
