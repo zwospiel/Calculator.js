@@ -1,0 +1,40 @@
+body {
+    display: grid;
+    place-items: center;
+}
+
+.panel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+}
+
+.digit--top {
+    grid-row: 2;
+}
+
+.digit--mid {
+    grid-row: 3;
+}
+
+.digit--bot {
+    grid-row: 4;
+}
+
+.digit--zero {
+    grid-row: 5;
+}
+
+#CE {
+    grid-row: 1;
+    grid-column: 4;
+}
+
+.operator--right {
+    grid-column: 4;
+}
+
+#EQ {
+    grid-row: 5;
+    grid-column: span 2;
+}
