@@ -1,5 +1,5 @@
-import { Expression } from "../docs/js/Expression"
-import { UnknownOperator } from "../docs/js/Errors"
+import { Expression } from "../src/js/Expression"
+import { UnknownOperator } from "../src/js/Errors"
 
 
 describe("Expression.constructor", () => {
