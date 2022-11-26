@@ -1,4 +1,4 @@
-import { InputReader } from "../docs/js/InputReader"
+import { InputReader } from "../src/js/InputReader"
 
 
 describe("InputReader.constructor", () => {
