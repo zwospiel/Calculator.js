@@ -1,5 +1,5 @@
-import { Integer } from "./Integer"
-import { UnknownOperator } from "./Errors"
+import { Integer } from "./Integer.js"
+import { UnknownOperator } from "./Errors.js"
 
 
 export class Operators {

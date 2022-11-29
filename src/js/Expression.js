@@ -1,6 +1,6 @@
-import { InputReader } from "./InputReader"
-import { Operators } from "./Operators"
-import { Brackets } from "./Brackets"
+import { InputReader } from "./InputReader.js"
+import { Operators } from "./Operators.js"
+import { Brackets } from "./Brackets.js"
 
 
 export class Expression {
