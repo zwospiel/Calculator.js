@@ -1,13 +1,13 @@
 body {
-    background-color: blueviolet;
+    background-color: coral;
 }
 
 button.light {
-    background-color: #eee;
+    background-color: mistyrose;
 }
 
 button.dark {
-    background-color: #ddd;
+    background-color: thistle;
 }
 
 button:hover {
