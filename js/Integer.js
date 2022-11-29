@@ -1,4 +1,4 @@
-import { InvalidInput } from "./Errors"
+import { InvalidInput } from "./Errors.js"
 
 
 // In this file we are manipulating Integers using the Two's Complement binary representation,
