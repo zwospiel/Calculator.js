@@ -1,11 +1,11 @@
-.input {
+.display {
     text-align: right;
     font-family: monospace;
     font-weight: bold;
     font-size: 1.5rem;
 }
 
-.input:focus {
+.display:focus {
     outline: none;
 }
 
