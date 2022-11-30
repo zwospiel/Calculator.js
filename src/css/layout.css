@@ -14,16 +14,16 @@ body {
     width: 16rem;
 }
 
-.display,
+.display-container,
 .panel {
     max-width: 100%;
 }
 
-.display {
+.display-container {
     padding-bottom: 5px;
 }
 
-.input {
+.display {
     resize: none;
     height: 5rem;
     width: 100%;
