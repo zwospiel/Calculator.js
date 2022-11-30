@@ -1,7 +1,7 @@
 import { Expression } from "./Expression.js"
 
 
-const input = document.querySelector(".input")
+const display = document.querySelector(".display")
 const digits = document.querySelectorAll(".digit")
 const operators = document.querySelectorAll(".operator")
 const CE = document.querySelector("#CE")
@@ -13,19 +13,19 @@ CE.addEventListener("click", clearEntry)
 EQ.addEventListener("click", solve)
 
 function appendInput(event) {
-    input.value += event.target.textContent
+    display.value += event.target.textContent
 }
 
 function solve() {
-    if (input.value === "") {
+    if (display.value === "") {
         return
     }
 
-    let parsedInput = input.value.replace(/\u00d7/g, "*")
-    let expression = new Expression(parsedInput)
-    input.value = expression.solve()
+    let input = display.value.replace(/\u00d7/g, "*")
+    let expression = new Expression(input)
+    display.value = expression.solve()
 }
 
 function clearEntry() {
-    input.value = input.value.slice(0, -1)
+    display.value = display.value.slice(0, -1)
 }
