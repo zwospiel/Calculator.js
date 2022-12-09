@@ -1,5 +1,5 @@
 import { Expression } from "../src/js/Expression"
-import { InvalidInput } from "../src/js/Errors"
+import { InvalidInput, UnbalancedBrackets } from "../src/js/Errors"
 
 
 describe("Expression.constructor", () => {
@@ -8,6 +8,26 @@ describe("Expression.constructor", () => {
             expect(() => new Expression()).toThrow(TypeError)
             expect(() => new Expression(4)).toThrow(TypeError)
             expect(() => new Expression([ 4 ])).toThrow(TypeError)
+        })
+    })
+    describe("throws UnbalancedBrackets Error", () => {
+        test("for opening bracket without closing", () => {
+            expect(() => new Expression("(3+4")).toThrow(UnbalancedBrackets)
+            expect(() => new Expression("3+4(")).toThrow(UnbalancedBrackets)
+        })
+        test("for closing bracket without opening", () => {
+            expect(() => new Expression("3+4)")).toThrow(UnbalancedBrackets)
+            expect(() => new Expression(")7+10(")).toThrow(UnbalancedBrackets)
+        })
+        test("for wrong pair of brackets", () => {
+            expect(() => new Expression("(3+4]")).toThrow(UnbalancedBrackets)
+        })
+        test("for unbalanced brackets", () => {
+            expect(() => new Expression("(3+4))")).toThrow(UnbalancedBrackets)
+            expect(() => new Expression("[[3+4]")).toThrow(UnbalancedBrackets)
+        })
+        test("for wrong nesting order of brackets", () => {
+            expect(() => new Expression("3*(4+[7+15)*10]")).toThrow(UnbalancedBrackets)
         })
     })
 })
