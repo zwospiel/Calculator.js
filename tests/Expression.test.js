@@ -1,5 +1,5 @@
 import { Expression } from "../src/js/Expression"
-import { UnknownOperator } from "../src/js/Errors"
+import { InvalidInput } from "../src/js/Errors"
 
 
 describe("Expression.constructor", () => {
@@ -13,9 +13,9 @@ describe("Expression.constructor", () => {
 })
 
 describe("Expression.solve", () => {
-    describe("throws UnknownOperator Error", () => {
+    describe("throws InvalidInput Error", () => {
         test("for unknown operator", () => {
-            expect(() => new Expression("3%4").solve()).toThrow(UnknownOperator)
+            expect(() => new Expression("3%4").solve()).toThrow(InvalidInput)
         })
     })
     describe("returns correct result", () => {
