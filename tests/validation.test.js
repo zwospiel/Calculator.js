@@ -25,11 +25,8 @@ describe("Expect bracketsAreBalanced to throw", () => {
             test("with square brackets", () => {
                 expect(() => bracketsAreBalanced("[]")).not.toThrow()
             })
-            test("with curly braces", () => {
-                expect(() => bracketsAreBalanced("{}")).not.toThrow()
-            })
             test("with mixed brackets", () => {
-                expect(() => bracketsAreBalanced("([{}]}")).not.toThrow()
+                expect(() => bracketsAreBalanced("([])")).not.toThrow()
             })
 
         })
@@ -40,11 +37,8 @@ describe("Expect bracketsAreBalanced to throw", () => {
             test("with square brackets", () => {
                 expect(() => bracketsAreBalanced("][")).not.toThrow()
             })
-            test("with curly braces", () => {
-                expect(() => bracketsAreBalanced("}{")).not.toThrow()
-            })
             test("with mixed brackets", () => {
-                expect(() => bracketsAreBalanced(")]}{[(")).not.toThrow()
+                expect(() => bracketsAreBalanced(")][(")).not.toThrow()
             })
 
         })
@@ -59,70 +53,58 @@ describe("Expect bracketsAreBalanced to return", () => {
         test("for two balanced brackets", () => {
             expect(bracketsAreBalanced("()")).toBe(true)
             expect(bracketsAreBalanced("[]")).toBe(true)
-            expect(bracketsAreBalanced("{}")).toBe(true)
         })
         test("for a nested pair of balanced brackets", () => {
             expect(bracketsAreBalanced("(())")).toBe(true)
             expect(bracketsAreBalanced("[[]]")).toBe(true)
-            expect(bracketsAreBalanced("{{}}")).toBe(true)
         })
         test("for a sequential pair of balanced brackets", () => {
             expect(bracketsAreBalanced("()()")).toBe(true)
             expect(bracketsAreBalanced("[][]")).toBe(true)
-            expect(bracketsAreBalanced("{}{}")).toBe(true)
         })
         test("for balanced nested mixed brackets", () => {
-            expect(bracketsAreBalanced("([{}])")).toBe(true)
-            expect(bracketsAreBalanced("()[]{}")).toBe(true)
-            expect(bracketsAreBalanced("([]){()}")).toBe(true)
+            expect(bracketsAreBalanced("([])")).toBe(true)
+            expect(bracketsAreBalanced("()[]")).toBe(true)
+            expect(bracketsAreBalanced("([])()")).toBe(true)
         })
     })
     describe("false", () => {
         test("for an unclosed opening bracket", () => {
             expect(bracketsAreBalanced("(")).toBe(false)
             expect(bracketsAreBalanced("[")).toBe(false)
-            expect(bracketsAreBalanced("{")).toBe(false)
         })
         test("for an even number of unclosed opening brackets", () => {
             expect(bracketsAreBalanced("((")).toBe(false)
             expect(bracketsAreBalanced("[[")).toBe(false)
-            expect(bracketsAreBalanced("{{")).toBe(false)
         })
         test("for a single unopened closing bracket", () => {
             expect(bracketsAreBalanced(")")).toBe(false)
             expect(bracketsAreBalanced("]")).toBe(false)
-            expect(bracketsAreBalanced("}")).toBe(false)
         })
         test("for an even number of unopened closing brackets", () => {
             expect(bracketsAreBalanced("))")).toBe(false)
             expect(bracketsAreBalanced("]]")).toBe(false)
-            expect(bracketsAreBalanced("}}")).toBe(false)
         })
         test("for a pair of brackets in the wrong order", () => {
             expect(bracketsAreBalanced(")(")).toBe(false)
             expect(bracketsAreBalanced("][")).toBe(false)
-            expect(bracketsAreBalanced("}{")).toBe(false)
         })
         test("for an extra opening bracket", () => {
             expect(bracketsAreBalanced("()(")).toBe(false)
             expect(bracketsAreBalanced("[][")).toBe(false)
-            expect(bracketsAreBalanced("{}{")).toBe(false)
         })
         test("for an extra closing bracket", () => {
             expect(bracketsAreBalanced("())")).toBe(false)
             expect(bracketsAreBalanced("[]]")).toBe(false)
-            expect(bracketsAreBalanced("{}}")).toBe(false)
         })
         test("for incorrectly nested mixed balanced brackets", () => {
             expect(bracketsAreBalanced("([)]")).toBe(false)
-            expect(bracketsAreBalanced("[{]}")).toBe(false)
-            expect(bracketsAreBalanced("{(})")).toBe(false)
         })
         test("for a mixed formula with an unclosed opening bracket in the middle", () => {
-            expect(bracketsAreBalanced("([]){()()}[(]([()])")).toBe(false)
+            expect(bracketsAreBalanced("([])()()[(]([()])")).toBe(false)
         })
         test("for a mixed formula with an unopened closing bracket in the middle", () => {
-            expect(bracketsAreBalanced("([]{})[()])({()[]})")).toBe(false)
+            expect(bracketsAreBalanced("([])[()])(()[])")).toBe(false)
         })
     })
 })
