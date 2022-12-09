@@ -19,6 +19,12 @@ describe("Expression.solve", () => {
         })
     })
     describe("returns correct result", () => {
+        test("when input is a single-digit number", () => {
+            expect(new Expression("3").solve()).toBe(3)
+        })
+        test("when input is a multi-digit number", () => {
+            expect(new Expression("34").solve()).toBe(34)
+        })
         test("for single addition", () => {
             expect(new Expression("3+4").solve()).toBe(7)
         })
@@ -53,6 +59,23 @@ describe("Expression.solve", () => {
         })
         test("for mixed operators and brackets", () => {
             expect(new Expression("(3+4*5)*6+7").solve()).toBe(145)
+        })
+        test("for mixed operators, brackets and multi-digit numbers", () => {
+            expect(new Expression("(34+56*78)*90").solve()).toBe(396180)
+        })
+    })
+    describe("ignores whitespaces", () => {
+        test("inbetween tokens", () => {
+            let expression = new Expression("3 + 4")
+            expect(expression.solve()).toBe(7)
+        })
+        test("at beginning of input", () => {
+            let expression = new Expression(" 3+4")
+            expect(expression.solve()).toBe(7)
+        })
+        test("at end of input", () => {
+            let expression = new Expression("3+4 ")
+            expect(expression.solve()).toBe(7)
         })
     })
 })
