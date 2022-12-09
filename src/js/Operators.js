@@ -1,5 +1,5 @@
 import { add, multiply } from "./Integer.js"
-import { UnknownOperator } from "./Errors.js"
+import { InvalidInput } from "./Errors.js"
 
 
 const operatorsToPrecedence = {
@@ -40,6 +40,6 @@ export function apply(operator, operand1, operand2) {
         case "*":
             return multiply(operand1, operand2)
         default:
-            throw new UnknownOperator(operator)
+            throw new InvalidInput(operator)
     }
 }
