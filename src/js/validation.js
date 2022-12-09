@@ -1,5 +1,5 @@
-import { Brackets } from "./Brackets"
 import { InvalidInput } from "./Errors"
+import { isOpenBracket, getClosedBracket, isBracket } from "./Brackets"
 
 
 export function bracketsAreBalanced(expression) {
@@ -11,9 +11,9 @@ export function bracketsAreBalanced(expression) {
 
     let openedBrackets = []
     for (const character of expression) {
-        if (Brackets.isOpen(character)) {
+        if (isOpenBracket(character)) {
             openedBrackets.push(character)
-        } else if (character === Brackets.getClosed(openedBrackets.slice(-1)[0])) {
+        } else if (character === getClosedBracket(openedBrackets.slice(-1)[0])) {
             openedBrackets.pop()
         } else {
             return false
@@ -29,7 +29,7 @@ function validate(expression) {
     }
 
     for (const character of expression) {
-        if (!Brackets.includes(character)) {
+        if (!isBracket(character)) {
             throw new InvalidInput(character)
         }
     }

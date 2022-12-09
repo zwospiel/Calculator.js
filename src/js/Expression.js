@@ -1,5 +1,5 @@
-import { Operators } from "./Operators.js"
-import { Brackets } from "./Brackets.js"
+import { compare, apply } from "./Operators.js"
+import { isOpenBracket, isClosedBracket } from "./Brackets.js"
 
 
 export class Expression {
@@ -29,15 +29,15 @@ export class Expression {
         for (const token of this.#iterateTokens()) {
             if (typeof token === "number") {
                 this.#operands.push(token)
-            } else if (Brackets.isOpen(token)) {
+            } else if (isOpenBracket(token)) {
                 this.#operators.push(token)
-            } else if (Brackets.isClosed(token)) {
-                while (!Brackets.isOpen(this.#peekOperators())) {
+            } else if (isClosedBracket(token)) {
+                while (!isOpenBracket(this.#peekOperators())) {
                     this.#operateTop()
                 }
                 this.#operators.pop()
             } else {
-                while (Operators.compare(this.#peekOperators(), token) >= 0) {
+                while (compare(this.#peekOperators(), token) >= 0) {
                     this.#operateTop()
                 }
                 this.#operators.push(token)
@@ -80,7 +80,7 @@ export class Expression {
         const operand2 = this.#operands.pop()
         const operand1 = this.#operands.pop()
         const operator = this.#operators.pop()
-        const result = Operators.apply(operator, operand1, operand2)
+        const result = apply(operator, operand1, operand2)
         this.#operands.push(result)
     }
 
