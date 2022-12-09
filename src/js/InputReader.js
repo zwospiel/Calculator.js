@@ -18,7 +18,7 @@ export class InputReader {
      */
     *iterateTokens() {
         for (let i = 0; i < this.#input.length; i++) {
-            if (InputReader.#isNumber(this.#input[i])) {
+            if (InputReader.#isDigit(this.#input[i])) {
                 let number = this.#parseNumberAt(i)
                 i += InputReader.#lengthOf(number) - 1
                 yield number
@@ -30,7 +30,7 @@ export class InputReader {
         }
     }
 
-    static #isNumber(character) {
+    static #isDigit(character) {
         return /\d/.test(character)
     }
 
