@@ -2,7 +2,6 @@ export class Brackets {
     static #closedByOpen = {
         "(": ")",
         "[": "]",
-        "{": "}",
     }
 
     static get #openBrackets() {
