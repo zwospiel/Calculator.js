@@ -1,5 +1,6 @@
 import { compare, apply } from "./Operators.js"
-import { isOpenBracket, isClosedBracket } from "./Brackets.js"
+import { isOpenBracket, isClosedBracket, hasBalancedBrackets } from "./Brackets.js"
+import { UnbalancedBrackets } from "./Errors.js"
 
 
 export class Expression {
@@ -14,6 +15,10 @@ export class Expression {
     constructor(input) {
         if (typeof(input) !== "string") {
             throw new TypeError("Expected input to be a string.")
+        }
+
+        if (!hasBalancedBrackets(input)) {
+            throw new UnbalancedBrackets(input)
         }
 
         this.#input = input
