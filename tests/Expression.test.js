@@ -106,5 +106,9 @@ describe("Expression.solve", () => {
             let expression = new Expression("3+4 ")
             expect(expression.solve()).toBe(7)
         })
+        test("in succession", () => {
+            let expression = new Expression("( 3 +   4      )  * 5")
+            expect(expression.solve()).toBe(35)
+        })
     })
 })
