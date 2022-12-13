@@ -19,14 +19,14 @@ describe("Expression.constructor", () => {
             expect(() => new Expression("3+4)")).toThrow(UnbalancedBrackets)
             expect(() => new Expression(")7+10(")).toThrow(UnbalancedBrackets)
         })
-        test("for wrong pair of brackets", () => {
+        test("for mismatching pair of brackets", () => {
             expect(() => new Expression("(3+4]")).toThrow(UnbalancedBrackets)
         })
         test("for unbalanced brackets", () => {
             expect(() => new Expression("(3+4))")).toThrow(UnbalancedBrackets)
             expect(() => new Expression("[[3+4]")).toThrow(UnbalancedBrackets)
         })
-        test("for wrong nesting order of brackets", () => {
+        test("for mismatching nesting order of brackets", () => {
             expect(() => new Expression("3*(4+[7+15)*10]")).toThrow(UnbalancedBrackets)
         })
     })
