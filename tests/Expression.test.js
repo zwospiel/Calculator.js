@@ -1,5 +1,5 @@
 import { Expression } from "../src/js/Expression"
-import { InvalidInput, UnbalancedBrackets } from "../src/js/Errors"
+import { InvalidInput, UnbalancedBrackets, MalformedExpression } from "../src/js/Errors"
 
 
 describe("Expression.constructor", () => {
@@ -45,6 +45,68 @@ describe("Expression.solve", () => {
         test("for invalid string", () => {
             let expression = new Expression("7+turing+7")
             expect(() => expression.solve()).toThrow(InvalidInput)
+        })
+    })
+    describe("throws MalformedExpression Error", () => {
+        test("when input is just an operator", () => {
+            let expression = new Expression("+")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for empty brackets", () => {
+            let expression = new Expression("()")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for empty brackets followed by valid expression", () => {
+            let expression = new Expression("()3+4")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for multiple operators in a row", () => {
+            let expression = new Expression("3++4")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+            expression = new Expression("3*+4")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+            expression = new Expression("7**+*+5")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for operator at the beginning", () => {
+            let expression = new Expression("+3*4")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for operator at the beginning preceded by whitespaces", () => {
+            let expression = new Expression("    +3*4")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for operator at the end", () => {
+            let expression = new Expression("3*4+")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for operator at the end followed by whitespaces", () => {
+            let expression = new Expression("3*4+   ")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for missing operator before open bracket", () => {
+            let expression = new Expression("3(7+5)")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for missing operator after closed bracket", () => {
+            let expression = new Expression("(7+5)3")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for open bracket between number and operator", () => {
+            let expression = new Expression("2*1(+3*5)")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for closed bracket between number and operator", () => {
+            let expression = new Expression("(3*5+)2*1")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for missing number after opening bracket", () => {
+            let expression = new Expression("5+(+7)")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for missing number before closing bracket", () => {
+            let expression = new Expression("(5+)*7")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
         })
     })
     describe("returns correct result", () => {

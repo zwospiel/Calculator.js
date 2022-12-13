@@ -1,6 +1,6 @@
-import { compare, apply } from "./Operators.js"
+import { compare, apply, isOperator } from "./Operators.js"
 import { isOpenBracket, isClosedBracket, hasBalancedBrackets } from "./Brackets.js"
-import { UnbalancedBrackets } from "./Errors.js"
+import { UnbalancedBrackets, MalformedExpression } from "./Errors.js"
 
 
 export class Expression {
@@ -24,11 +24,13 @@ export class Expression {
         this.#input = input.replace(/ /g, "")
         this.#operands = []
         this.#operators = []
+        this.#previousToken = undefined
     }
 
     #input
     #operands
     #operators
+    #previousToken
 
     solve() {
         for (const token of this.#iterateTokens()) {
@@ -68,11 +70,59 @@ export class Expression {
             if (Expression.#isDigit(this.#input[i])) {
                 let number = this.#parseNumberAt(i)
                 i += Expression.#lengthOf(number) - 1
+                this.#validateTokenOrder(number)
                 yield number
             } else {
+                this.#validateTokenOrder(this.#input[i])
                 yield this.#input[i]
             }
         }
+    }
+
+    #validateTokenOrder(token) {
+        if (this.#previousToken === undefined) {
+            if (isOperator(token)) {
+                throw new MalformedExpression("Operator at beginning: " + this.#input)
+            }
+            if (isClosedBracket(token)) {
+                throw new MalformedExpression("Closed bracket at beginning: " + this.#input)
+            }
+            if (isOperator(this.#input[this.#input.length - 1])) {
+                throw new MalformedExpression("Operator at end: " + this.#input)
+            }
+        }
+
+        if (typeof this.#previousToken === "number") {
+            if (isOpenBracket(token)) {
+                throw new MalformedExpression("Missing operator: " + this.#input)
+            }
+        }
+
+        if (isOpenBracket(this.#previousToken)) {
+            if (isClosedBracket(token)) {
+                throw new MalformedExpression("Empty bracket pair: " + this.#input)
+            }
+            if (isOperator(token)) {
+                throw new MalformedExpression("Missing number: " + this.#input)
+            }
+        }
+
+        if (isClosedBracket(this.#previousToken)) {
+            if (typeof token === "number") {
+                throw new MalformedExpression("Missing operator: " + this.#input)
+            }
+        }
+
+        if (isOperator(this.#previousToken)) {
+            if (isOperator(token)) {
+                throw new MalformedExpression("Consecutive operators: " + this.#input)
+            }
+            if (isClosedBracket(token)) {
+                throw new MalformedExpression("Missing number: " + this.#input)
+            }
+        }
+
+        this.#previousToken = token
     }
 
     #parseNumberAt(i) {
