@@ -21,7 +21,7 @@ export class Expression {
             throw new UnbalancedBrackets(input)
         }
 
-        this.#input = input
+        this.#input = input.replace(/ /g, "")
         this.#operands = []
         this.#operators = []
     }
@@ -69,8 +69,6 @@ export class Expression {
                 let number = this.#parseNumberAt(i)
                 i += Expression.#lengthOf(number) - 1
                 yield number
-            } else if (this.#input[i] === " ") {
-                continue
             } else {
                 yield this.#input[i]
             }
