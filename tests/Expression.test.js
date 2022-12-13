@@ -35,7 +35,16 @@ describe("Expression.constructor", () => {
 describe("Expression.solve", () => {
     describe("throws InvalidInput Error", () => {
         test("for unknown operator", () => {
-            expect(() => new Expression("3%4").solve()).toThrow(InvalidInput)
+            let expression = new Expression("3%4")
+            expect(() => expression.solve()).toThrow(InvalidInput)
+        })
+        test("for invalid character", () => {
+            let expression = new Expression("3+ä4")
+            expect(() => expression.solve()).toThrow(InvalidInput)
+        })
+        test("for invalid string", () => {
+            let expression = new Expression("7+turing+7")
+            expect(() => expression.solve()).toThrow(InvalidInput)
         })
     })
     describe("returns correct result", () => {
