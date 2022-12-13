@@ -9,3 +9,9 @@ export class UnbalancedBrackets extends Error {
         super("Unbalanced Brackets: " + input)
     }
 }
+
+export class MalformedExpression extends Error {
+    constructor(input) {
+        super("Malformed Expression: " + input)
+    }
+}
