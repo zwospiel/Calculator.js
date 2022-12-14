@@ -1,6 +1,6 @@
 import { compare, apply, isOperator } from "./Operators.js"
-import { isOpenBracket, isClosedBracket, hasBalancedBrackets } from "./Brackets.js"
-import { UnbalancedBrackets, MalformedExpression } from "./Errors.js"
+import { isOpenBracket, isClosedBracket, isBracket, hasBalancedBrackets } from "./Brackets.js"
+import { UnbalancedBrackets, MalformedExpression, InvalidInput } from "./Errors.js"
 
 
 export class Expression {
@@ -72,9 +72,11 @@ export class Expression {
                 i += Expression.#lengthOf(number) - 1
                 this.#validateTokenOrder(number)
                 yield number
-            } else {
+            } else if (isOperator(this.#input[i]) || isBracket(this.#input[i])) {
                 this.#validateTokenOrder(this.#input[i])
                 yield this.#input[i]
+            } else {
+                throw new InvalidInput(this.#input)
             }
         }
     }
