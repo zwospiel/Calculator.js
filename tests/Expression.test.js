@@ -72,16 +72,8 @@ describe("Expression.solve", () => {
             let expression = new Expression("+3*4")
             expect(() => expression.solve()).toThrow(MalformedExpression)
         })
-        test("for operator at the beginning preceded by whitespaces", () => {
-            let expression = new Expression("    +3*4")
-            expect(() => expression.solve()).toThrow(MalformedExpression)
-        })
         test("for operator at the end", () => {
             let expression = new Expression("3*4+")
-            expect(() => expression.solve()).toThrow(MalformedExpression)
-        })
-        test("for operator at the end followed by whitespaces", () => {
-            let expression = new Expression("3*4+   ")
             expect(() => expression.solve()).toThrow(MalformedExpression)
         })
         test("for missing operator before open bracket", () => {
@@ -160,17 +152,25 @@ describe("Expression.solve", () => {
             let expression = new Expression("3 + 4")
             expect(expression.solve()).toBe(7)
         })
-        test("at beginning of input", () => {
+        test("for whitespaces followed by valid input", () => {
             let expression = new Expression(" 3+4")
             expect(expression.solve()).toBe(7)
         })
-        test("at end of input", () => {
+        test("for valid input followed by whitespaces", () => {
             let expression = new Expression("3+4 ")
             expect(expression.solve()).toBe(7)
         })
         test("in succession", () => {
             let expression = new Expression("( 3 +   4      )  * 5")
             expect(expression.solve()).toBe(35)
+        })
+        test("for whitespaces followed by malformed expression", () => {
+            let expression = new Expression("    +3*4")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
+        })
+        test("for malformed expression followed by whitespaces", () => {
+            let expression = new Expression("3*4+   ")
+            expect(() => expression.solve()).toThrow(MalformedExpression)
         })
     })
 })
