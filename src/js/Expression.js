@@ -81,6 +81,22 @@ export class Expression {
         }
     }
 
+    #operateTop() {
+        const operand2 = this.#operands.pop()
+        const operand1 = this.#operands.pop()
+        const operator = this.#operators.pop()
+        const result = apply(operator, operand1, operand2)
+        this.#operands.push(result)
+    }
+
+    #peekOperators() {
+        return this.#operators.slice(-1)[0]
+    }
+
+    #parseNumberAt(i) {
+        return parseInt(this.#input.slice(i))
+    }
+
     #validateTokenOrder(token) {
         if (this.#previousToken === undefined) {
             if (isOperator(token)) {
@@ -125,21 +141,5 @@ export class Expression {
         }
 
         this.#previousToken = token
-    }
-
-    #parseNumberAt(i) {
-        return parseInt(this.#input.slice(i))
-    }
-
-    #operateTop() {
-        const operand2 = this.#operands.pop()
-        const operand1 = this.#operands.pop()
-        const operator = this.#operators.pop()
-        const result = apply(operator, operand1, operand2)
-        this.#operands.push(result)
-    }
-
-    #peekOperators() {
-        return this.#operators.slice(-1)[0]
     }
 }
