@@ -85,14 +85,14 @@
         "no-return-assign": [
             "warn"
         ],
-        "array-bracket-newline": [ 
-            "error", 
-            "consistent" 
+        "array-bracket-newline": [
+            "error",
+            "consistent"
         ],
         "array-bracket-spacing": [
             "warn",
             "always",
-            { 
+            {
                 "objectsInArrays": false,
                 "arraysInArrays": false
             }
