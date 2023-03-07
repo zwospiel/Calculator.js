@@ -62,7 +62,7 @@ function haveSameSign(a, b) {
 }
 
 function isNegative(integer) {
-    // A bitwise AND operation with 1000... is equivalent to checking negativity.
+    // A bitwise AND operation with 100..0 is equivalent to checking negativity.
     return (integer & MIN) !== 0
 }
 
